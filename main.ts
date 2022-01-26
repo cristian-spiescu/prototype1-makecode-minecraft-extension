@@ -36,3 +36,12 @@ namespace custom {
         return value <= 1 ? value : fib(value -1) + fib(value - 2);
     }
 }
+
+player.onChat("ex1", function() {
+    blocks.clone(world(2201, 89, -500), world(2225, 93, -495), world(2201, 80, -500), CloneMask.Replace, CloneMode.Normal)
+})
+
+
+player.onChat("exclear", function() {
+    blocks.fill(AIR, world(2201, 80, -500), world(2225, 84, -495))
+})
