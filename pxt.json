@@ -1,0 +1,13 @@
+{
+    "name": "prototype1-makecode-minecraft-extension",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "builder": "*"
+    },
+    "files": [
+        "main.ts",
+        "README.md"
+    ],
+    "preferredEditor": "tsprj"
+}
