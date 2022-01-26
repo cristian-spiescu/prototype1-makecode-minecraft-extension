@@ -10,5 +10,6 @@
         "main.ts",
         "README.md"
     ],
+    "public": true,
     "preferredEditor": "tsprj"
 }
