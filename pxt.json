@@ -1,6 +1,7 @@
 {
     "name": "prototype1-makecode-minecraft-extension",
     "description": "",
+    "version": "0.0.1",
     "dependencies": {
         "core": "*",
         "builder": "*"
