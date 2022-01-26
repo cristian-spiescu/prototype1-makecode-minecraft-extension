@@ -23,7 +23,7 @@ namespace custom {
      * @param e describe parameter here
      */
     //% block
-    export function foo1(n: number, s: string, e: MyEnum): void {
+    export function foo2(n: number, s: string, e: MyEnum): void {
         // Add code here
     }
 
