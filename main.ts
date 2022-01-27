@@ -16,7 +16,7 @@ class LabManager {
                 return;
             }
             blocks.clone(location[0], location[1], target1, CloneMask.Replace, CloneMode.Normal)
-            agent.teleport(this.target1.add(pos(-1, 0, 0)), EAST)
+            agent.teleport(that.target1.add(pos(-1, 0, 0)), EAST)
         })
 
         player.onChat("labclear", () => {
