@@ -1,47 +1,51 @@
+class LabManager {
+    
+    protected locations = [
+        [world(2201, 89, -500), world(2225, 93, -495)],
+        [world(2201, 89, -493), world(2225, 97, -483)]
+    ]
 
-/**
- * Use this file to define custom functions and blocks.
- * Read more at https://minecraft.makecode.com/blocks/custom
- */
+    constructor(protected target1: Position, protected target2: Position) {
+        const that = this;
+        // unfortunately MC thinks we have 0 args, and throws warning when we provide an arg;
+        // I tried w/ "function", because I thought that maybe it's the arrow function that misleads it
+        player.onChat("lab", function(locationIndex) {
+            const location = that.locations[locationIndex];
+            if (!location) {
+                player.say("Error! Location doesn't exist with index = " + locationIndex);
+                return;
+            }
+            blocks.clone(location[0], location[1], target1, CloneMask.Replace, CloneMode.Normal)
+            agent.teleport(this.target1.add(pos(-1, 0, 0)), EAST)
+        })
 
- enum MyEnum {
-    //% block="one"
-    One,
-    //% block="two"
-    Two
+        player.onChat("labclear", () => {
+            blocks.fill(AIR, this.target1, this.target2);
+            agent.teleport(this.target1.add(pos(-1, 0, 0)), EAST)
+        })
+
+        const sizeX = this.target2.getValue(Axis.X) - this.target1.getValue(Axis.X) + 1;
+        const sizeY = this.target2.getValue(Axis.Y) - this.target1.getValue(Axis.Y) + 1;
+        const sizeZ = this.target2.getValue(Axis.Z) - this.target1.getValue(Axis.Z) + 1;
+        
+        for (const location of this.locations) {
+            location[1] = world(
+                Math.min(location[1].getValue(Axis.X), location[0].getValue(Axis.X) + sizeX - 1),
+                Math.min(location[1].getValue(Axis.Y), location[0].getValue(Axis.Y) + sizeY - 1),
+                Math.min(location[1].getValue(Axis.Z), location[0].getValue(Axis.Z) + sizeZ - 1)
+            )
+        }
+    }
 }
 
-/**
- * Custom blocks
- */
-//% weight=100 color=#0fbc11 icon=""
-namespace custom {
-    /**
-     * TODO: describe your function here
-     * @param n describe parameter here, eg: 5
-     * @param s describe parameter here, eg: "Hello"
-     * @param e describe parameter here
-     */
-    //% block
-    export function foo2(n: number, s: string, e: MyEnum): void {
-        // Add code here
-    }
-
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
+class LabManagerHenri extends LabManager {
+    constructor() {
+        super(world(2201, 80, -500), world(2239, 87, -494));
     }
 }
 
-player.onChat("ex1", function() {
-    blocks.clone(world(2201, 89, -500), world(2225, 93, -495), world(2201, 80, -500), CloneMask.Replace, CloneMode.Normal)
-})
-
-
-player.onChat("exclear", function() {
-    blocks.fill(AIR, world(2201, 80, -500), world(2225, 84, -495))
-})
+class LabManagerStefi extends LabManager {
+    constructor() {
+        super(world(2201, 80, -490), world(2239, 87, -484));
+    }
+}
